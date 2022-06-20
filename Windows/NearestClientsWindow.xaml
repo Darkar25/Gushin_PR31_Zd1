@@ -1,0 +1,24 @@
+﻿<Window x:Class="Salon.Windows.NearestClientsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Salon.Windows" xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="Ближайшие записи" Height="450" Width="800" DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
+    <syncfusion:SfScheduler x:Name="Schedule"
+                            AppointmentEditFlag="None"
+                            EnableReminder="True"
+                            ViewType="Week"
+                            FirstDayOfWeek="Monday"
+                            QueryAppointments="Schedule_QueryAppointments"
+                            ReminderAlertOpening="Schedule_ReminderAlertOpening"
+                            CellTapped="Schedule_CellTapped">
+        <syncfusion:SfScheduler.DaysViewSettings>
+            <syncfusion:DaysViewSettings>
+                <syncfusion:DaysViewSettings.TimeRulerFormat>HH:mm</syncfusion:DaysViewSettings.TimeRulerFormat>
+                <syncfusion:DaysViewSettings.TimeIntervalSize>128</syncfusion:DaysViewSettings.TimeIntervalSize>
+            </syncfusion:DaysViewSettings>
+        </syncfusion:SfScheduler.DaysViewSettings>
+    </syncfusion:SfScheduler>
+</Window>

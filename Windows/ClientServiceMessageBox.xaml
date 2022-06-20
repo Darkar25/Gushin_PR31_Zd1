@@ -1,0 +1,34 @@
+﻿<Window x:Class="Salon.Windows.ClientServiceMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Salon.Windows"
+        mc:Ignorable="d"
+        Title="Информация о записи" SizeToContent="WidthAndHeight" DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource Self}}">
+    <StackPanel Margin="8">
+        <TextBlock>
+            <Run>Название услуги:</Run>
+            <Run Text="{Binding cs.service.Title}"/>
+            <LineBreak/>
+            <Run>ФИО Клиента:</Run>
+            <Run Text="{Binding cs.client.LastName}"/>
+            <Run Text="{Binding cs.client.FirstName}"/>
+            <Run Text="{Binding cs.client.Patronymic}"/>
+            <LineBreak/>
+            <Run>Email:</Run>
+            <Run Text="{Binding cs.client.Email}"/>
+            <LineBreak/>
+            <Run>Телефон:</Run>
+            <Run Text="{Binding cs.client.Phone}"/>
+            <LineBreak/>
+            <Run>Дата и время записи:</Run>
+            <Run Text="{Binding cs.StartTime}"/>
+            <LineBreak/>
+            <Run>До начала:</Run>
+            <Run Text="{Binding StartText}" Name="starttime"/>
+            <LineBreak/>
+        </TextBlock>
+        <Button Content="_OK" HorizontalAlignment="Right" Click="Button_Click"/>
+    </StackPanel>
+</Window>

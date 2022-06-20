@@ -1,0 +1,62 @@
+﻿<Window x:Class="Salon.Windows.ServiceEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Salon.Windows" xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="Изменение услуги" Height="703.493" Width="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Window.Resources>
+        <BitmapImage UriSource="/Salon;component/images/no-pictures.png" x:Key="noimg"></BitmapImage>
+    </Window.Resources>
+    <DockPanel Margin="8" DataContext="{Binding Service}">
+        <DockPanel DockPanel.Dock="Top">
+            <Grid Height="64" Width="64" Background="Transparent" MouseLeftButtonDown="Image_MouseLeftButtonDown">
+                <Image Source="{Binding MainImagePath, FallbackValue={StaticResource noimg}}"/>
+            </Grid>
+            <syncfusion:SfTextInputLayout Hint="Название услуги" Margin="8" VerticalAlignment="Center" Name="namelayout" ErrorText="Эта услуга уже существует.">
+                <TextBox Name="name" TextChanged="name_TextChanged" Text="{Binding Title}"/>
+            </syncfusion:SfTextInputLayout>
+        </DockPanel>
+        <syncfusion:SfTextInputLayout Hint="Описание услуги" Margin="8" DockPanel.Dock="Top">
+            <TextBox Name="description" TextChanged="name_TextChanged" Text="{Binding Description}"/>
+        </syncfusion:SfTextInputLayout>
+        <Label Content="Дополнительные изображения:" DockPanel.Dock="Top"/>
+        <syncfusion:Carousel 
+            ItemsSource="{Binding servicephoto}"
+            Name="photos"
+            DockPanel.Dock="Top"
+            RadiusY="164"
+            Height="164"
+            ScaleFraction="0.5" 
+            ScalingEnabled="True"
+            EnableLooping="True"
+            OpacityFraction="0.8"
+            OpacityEnabled="True">
+            <syncfusion:Carousel.ItemTemplate>
+                <DataTemplate>
+                    <Viewbox Height="100" Width="100">
+                        <Image Source="{Binding PhotoPath}"/>
+                    </Viewbox>
+                </DataTemplate>
+            </syncfusion:Carousel.ItemTemplate>
+        </syncfusion:Carousel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center">
+            <syncfusion:ButtonAdv Label="Добавить" SmallIcon="/Salon;component/images/plus.png" Click="ButtonAdv_Click"/>
+            <syncfusion:ButtonAdv Label="Удалить" SmallIcon="/Salon;component/images/delete.png" Click="ButtonAdv_Click_1"/>
+        </StackPanel>
+        <syncfusion:SfTextInputLayout Hint="Продолжительность" Margin="8" DockPanel.Dock="Top">
+            <syncfusion:TimeSpanEdit MaxValue="0.4:0:0" AllowNull="True" Value="{Binding DurationInSeconds, Converter={StaticResource timespanseconds}, Mode=TwoWay}" MinValue="0" Format="h 'часов' m 'минут' s 'секунд'" Name="duration"/>
+        </syncfusion:SfTextInputLayout>
+        <syncfusion:SfTextInputLayout Hint="Стоимость услуги" Margin="8" DockPanel.Dock="Top">
+            <syncfusion:CurrencyTextBox Culture="ru-RU" Name="cost" UseNullOption="True" Value="{Binding Cost}" ScrollInterval="1" ShowSpinButton="True"/>
+        </syncfusion:SfTextInputLayout>
+        <syncfusion:SfTextInputLayout Hint="Размер скидки" Margin="8" DockPanel.Dock="Top">
+            <syncfusion:PercentTextBox Name="discount" UseNullOption="True" MaxValue="100" PercentValue="{Binding Discount}" ScrollInterval="1" EnableRangeAdorner="True" ShowSpinButton="True"/>
+        </syncfusion:SfTextInputLayout>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <syncfusion:ButtonAdv Label="Сохранить" SmallIcon="/Salon;component/images/check.png" Click="ButtonAdv_Click_2"/>
+            <syncfusion:ButtonAdv Label="Отмена" SmallIcon="/Salon;component/images/cancel.png" Click="ButtonAdv_Click_3"/>
+        </StackPanel>
+    </DockPanel>
+</Window>
